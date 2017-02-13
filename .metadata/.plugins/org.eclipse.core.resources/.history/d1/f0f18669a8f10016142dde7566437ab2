@@ -62,22 +62,11 @@ public class Main extends Application {
 				artist = scn.next();
 				list.delete(new Song(name,artist));
 			}else if (input == 3){
-				System.out.println("Enter original title");
+				System.out.println("Enter title");
 				name = scn.next();
-				System.out.println("Enter original artist");
+				System.out.println("Enter artist");
 				artist = scn.next();
-				Song original = new Song(name,artist);
-				System.out.println("Enter new title");
-				name = scn.next();
-				System.out.println("Enter new artist");
-				artist = scn.next();
-				Song newSong = new Song(name,artist);
-				try {
-					list.edit(original,newSong);
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+				list.delete(new Song(name,artist));
 			}else{
 				System.out.println("*********************PRINTING*********************");
 				print(list.list);

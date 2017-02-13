@@ -27,9 +27,9 @@ public class SongList {
 		Song curr = new Song(name,artist);
 		if(curr.compareTo(list.get(0)) < 0) //need to add to front
 			return 0;
-		for(i = 0; i < list.size(); i++){
+		for(i = 0; i < list.size()-1; i++){
 			result = curr.compareTo(list.get(i));
-			if( result <= 0 )
+			if( result == 0)
 				return i;
 		}
 		return i;
@@ -40,19 +40,10 @@ public class SongList {
 		int index = findSong(song.getName(),song.getArtist());
 		if(index == -2) //first addition
 			list.add(song);
-		else if(index == size){ //adding to end
-			if (list.get(index-1).equals(song)) //song already exists
-				throw new IllegalArgumentException();
-			if(song.compareTo(list.get(index-1)) > 0) //add behind last
-				list.add(song);
-			else
-				list.add(index-1,song);
-		}else{ //song doesn't exist, so adding
-			if(list.get(index).equals(song)) //song already exists
-					throw new IllegalArgumentException();	
-			else
-				list.add(index,song); //adding to list in proper index
-		}
+		else if(list.get(index).equals(song)) //song already exists
+			throw new IllegalArgumentException();
+		else
+			list.add(index,song);
 		size++;
 	}
 		
@@ -63,29 +54,27 @@ public class SongList {
 		if(list.size() == 1){
 			size = 0;
 			list.remove(0);
-			return;
 		}
 		int index = findSong(song.getName(),song.getArtist());
-		if(!(list.get(index).equals(song))) //song did not exist in list
+		if(index == -1) //song did not exist in list
 			throw new IllegalArgumentException();
 		list.remove(index);
 		size--;
 	}
 
 	//Pass in the song to be edited
-	public void edit(Song originalSong, Song newSong) throws Exception{
-		if(list==null || list.size() == 0)
+	public void edit(Song song) throws Exception{
+		if(list==null || size == 0)
 			return;
 		if(list.size() == 1){
 			size = 0;
 			list.remove(0);
 		}
-		int index = findSong(originalSong.getName(),originalSong.getArtist());
-		if(!(list.get(index).equals(originalSong))) //song did not exist in list
+		int index = findSong(song.getName(),song.getArtist());
+		if(index == -1) //song did not exist in list
 			throw new IllegalArgumentException();
 		list.remove(index);
-		size--;
-		add(newSong);
+		add(song);
 	}
 	
 	public void addSong2(String song, String artist){

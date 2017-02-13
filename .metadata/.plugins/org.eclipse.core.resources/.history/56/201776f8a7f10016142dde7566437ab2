@@ -63,29 +63,27 @@ public class SongList {
 		if(list.size() == 1){
 			size = 0;
 			list.remove(0);
-			return;
 		}
 		int index = findSong(song.getName(),song.getArtist());
-		if(!(list.get(index).equals(song))) //song did not exist in list
+		if(index == -1) //song did not exist in list
 			throw new IllegalArgumentException();
 		list.remove(index);
 		size--;
 	}
 
 	//Pass in the song to be edited
-	public void edit(Song originalSong, Song newSong) throws Exception{
-		if(list==null || list.size() == 0)
+	public void edit(Song song) throws Exception{
+		if(list==null || size == 0)
 			return;
 		if(list.size() == 1){
 			size = 0;
 			list.remove(0);
 		}
-		int index = findSong(originalSong.getName(),originalSong.getArtist());
-		if(!(list.get(index).equals(originalSong))) //song did not exist in list
+		int index = findSong(song.getName(),song.getArtist());
+		if(index == -1) //song did not exist in list
 			throw new IllegalArgumentException();
 		list.remove(index);
-		size--;
-		add(newSong);
+		add(song);
 	}
 	
 	public void addSong2(String song, String artist){

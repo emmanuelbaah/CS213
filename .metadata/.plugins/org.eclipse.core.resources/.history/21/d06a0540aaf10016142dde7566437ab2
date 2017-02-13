@@ -71,9 +71,8 @@ public class Main extends Application {
 				name = scn.next();
 				System.out.println("Enter new artist");
 				artist = scn.next();
-				Song newSong = new Song(name,artist);
 				try {
-					list.edit(original,newSong);
+					list.edit(new Song(name,artist));
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
