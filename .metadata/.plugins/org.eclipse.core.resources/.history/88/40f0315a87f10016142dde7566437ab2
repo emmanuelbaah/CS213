@@ -1,0 +1,92 @@
+package controller;
+
+import java.util.ArrayList;
+
+public class SongList {
+	
+	public Node<Song> PlayList;
+	public int size;
+	public ArrayList<Song> list;
+	
+	public SongList(){
+		PlayList = new Node<Song>();
+		size = 0;
+		 list = new ArrayList<Song>();
+		
+	}
+	
+	public void display(){
+		
+	}
+	
+	private int findSong(String name, String artist){
+		int i = 0;
+		int result = 0;
+		Song curr = new Song(name,artist);
+		for(i = 0; i < list.size(); i++){
+			result = curr.compareTo(list.get(i));
+			if( result == 0)
+				return i;
+			else if(result < 0)
+				return -1;
+		}
+		return i;
+	}
+	
+	public void add(String name, String artist) throws Exception{
+		int index = findSong(name,artist);
+		if(index == -1)
+			throw new IllegalArgumentException();
+		Song newSong = new Song(name,artist);
+		list.add(index,new Song(name,artist));
+		
+
+	}
+	
+	public void addSong(String song, String artist){
+		Song newSong = new Song(song,artist);
+		Node<Song> curr = new Node<Song>();
+
+		for(curr = PlayList; curr!=null;){
+			if(curr.data.compareTo(newSong) < 0){
+				if(curr.right == null){
+					curr.right = new Node<Song>(newSong);
+				}else{
+					curr = curr.right;
+				}
+			}else if(curr.data.compareTo(newSong) > 0){
+				if(curr.left == null){
+					curr.left = new Node<Song>(newSong);
+				}else{
+					curr = curr.left;
+				}
+			}else{ //song already exists
+				System.out.println("THROW EXCEPTION OR SOMETHING");
+			}
+		}
+	}
+	
+	public void add(Song song){
+		
+	}
+	public Song getSong(Song song){
+		
+	}
+	public void delete(Song song){
+		if(PlayList==null || size == 0)
+			return;
+		if(size == 1){
+			size = 0;
+			PlayList = null;
+		}
+		
+			
+	}
+	public void edit(){
+		
+	}
+	
+	public String toString(){
+		return PlayList.toString();
+	}
+}

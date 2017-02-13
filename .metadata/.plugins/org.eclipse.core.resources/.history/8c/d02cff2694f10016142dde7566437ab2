@@ -1,0 +1,74 @@
+package application;
+	
+import java.util.Scanner;
+
+import controller.Song;
+import controller.SongList;
+import javafx.application.Application;
+import javafx.stage.Stage;
+import javafx.scene.Scene;
+import javafx.scene.layout.BorderPane;
+
+
+public class Main extends Application {
+	@Override
+	public void start(Stage primaryStage) {
+		try {
+			BorderPane root = new BorderPane();
+			Scene scene = new Scene(root,400,400);
+			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+			primaryStage.setScene(scene);
+			primaryStage.show();
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static void main(String[] args) {
+//		launch(args);
+		
+		SongList list = new SongList();
+		Scanner scn = new Scanner(System.in);
+		String name = "";
+		String artist = "";
+		int input = -1;
+		while(input != 0){
+			System.out.println("Enter choice");
+			System.out.println("1 - Add");
+			System.out.println("2 - Delete");
+			System.out.println("3 - Edit");
+			System.out.println("0 - Quit");
+			
+			input = scn.nextInt();
+			if(input == 0)
+				break;
+			else if(input == 1){
+				System.out.println("Enter title");
+				name = scn.next();
+				System.out.println("Enter artist");
+				artist = scn.next();
+				try {
+					list.add(new Song(name,artist));
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}else if(input == 2){
+				System.out.println("Enter title");
+				name = scn.next();
+				System.out.println("Enter artist");
+				artist = scn.next();
+				list.delete(new Song(name,artist));
+			}else{
+				System.out.println("Enter title");
+				name = scn.next();
+				System.out.println("Enter artist");
+				artist = scn.next();
+				list.delete(new Song(name,artist));
+			}
+			System.out.println(list.toString());
+			
+		}
+		scn.close();
+	}
+}

@@ -6,39 +6,76 @@ public class SongList {
 	
 	public Node<Song> PlayList;
 	public int size;
+	public ArrayList<Song> list;
 	
 	public SongList(){
 		PlayList = new Node<Song>();
 		size = 0;
+		 list = new ArrayList<Song>();
+		
 	}
 	
 	public void display(){
 		
 	}
 	
-	private boolean findSong(String song, ArrayList<Song> songList){
-		boolean found = false;
-		Song curr = new Song(song,songList.get(0).getArtist());
-		for(int i = 0; i < songList.size(); i++){
-			if(curr.equals(songList.get(i))){
-				found = true;
-				break;
-			}
+	private int findSong(String name, String artist){
+		int i = 0;
+		int result = 0;
+		if(size == 0)
+			return -2;
+		Song curr = new Song(name,artist);
+		for(i = 0; i < list.size()-1; i++){
+			result = curr.compareTo(list.get(i));
+			if( result == 0)
+				return i;
 		}
-		return found;
+		return i;
 	}
 	
-	public void add(String name, String artist) throws Exception{
-		ArrayList<Song> artistList = findArtist(artist);
-		if(list == null){
-			//artist not found, so can add
-			
-		}else{
-			
+	
+	public void add(Song song) throws Exception{
+		int index = findSong(song.getName(),song.getArtist());
+		if(index == -2) //first addition
+			list.add(song);
+		else if(list.get(index).equals(song)) //song already exists
+			throw new IllegalArgumentException();
+		else
+			list.add(index,song);
+		size++;
+	}
+		
+	//Pass in the song that is to be deleted
+	public void delete(Song song){
+		if(list==null || size == 0)
+			return;
+		if(list.size() == 1){
+			size = 0;
+			list.remove(0);
 		}
+		int index = findSong(song.getName(),song.getArtist());
+		if(index == -1) //song did not exist in list
+			throw new IllegalArgumentException();
+		list.remove(index);
+		size--;
+	}
+
+	//Pass in the song to be edited
+	public void edit(Song song) throws Exception{
+		if(list==null || size == 0)
+			return;
+		if(list.size() == 1){
+			size = 0;
+			list.remove(0);
+		}
+		int index = findSong(song.getName(),song.getArtist());
+		if(index == -1) //song did not exist in list
+			throw new IllegalArgumentException();
+		list.remove(index);
+		add(song);
 	}
 	
-	public void addSong(String song, String artist){
+	public void addSong2(String song, String artist){
 		Song newSong = new Song(song,artist);
 		Node<Song> curr = new Node<Song>();
 
@@ -61,26 +98,7 @@ public class SongList {
 		}
 	}
 	
-	public void add(Song song){
-		
-	}
-	public Song getSong(Song song){
-		
-	}
-	public void delete(Song song){
-		if(PlayList==null || size == 0)
-			return;
-		if(size == 1){
-			size = 0;
-			PlayList = null;
-		}
-			
-	}
-	public void edit(){
-		
-	}
-	
 	public String toString(){
-		return PlayList.toString();
+		return list.toString();
 	}
 }
