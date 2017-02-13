@@ -1,0 +1,22 @@
+package controller;
+
+public class SongList {
+
+	public SongList(){
+		
+	}
+	
+	public void display(){
+		
+	}
+	
+	public void add(){
+		
+	}
+	public void delete(){
+		
+	}
+	public void edit(){
+		
+	}
+}

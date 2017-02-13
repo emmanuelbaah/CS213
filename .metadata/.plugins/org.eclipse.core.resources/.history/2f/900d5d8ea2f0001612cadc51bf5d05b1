@@ -1,0 +1,9 @@
+package controller;
+
+public class Node<A, S> {
+
+	Node<A,S> left;
+	Node<A,S> right;
+	A data;
+	Node<A,S> innerList;
+}

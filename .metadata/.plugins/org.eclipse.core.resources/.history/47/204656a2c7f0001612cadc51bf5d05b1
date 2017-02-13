@@ -1,0 +1,59 @@
+package controller;
+
+public class Song implements Comparable{
+	
+	public String name;
+	public String artist;
+	public String album;
+	public String year;
+	
+	public Song(String name, String artist, String album, String year){
+		this.name = name;
+		this.artist = artist;
+		this.album = album;
+		this.year = year;
+	}
+	
+	public Song(String name, String artist){
+		this(name,artist,"","");
+	}
+	
+	public Song(){
+		this("","");
+	}
+	
+	public String getName(){ 
+		return name;
+		}
+	public String getArtist(){
+		return artist;
+	}
+	public String getAlbum(){
+		return album;
+	}
+	public String getYear(){
+		return year;
+	}
+	
+	public boolean equals(Object obj){
+		if(obj == null || !(obj instanceof Song)){
+			return false;
+		}
+		
+		Song other = (Song)obj;
+		if((other.artist.equalsIgnoreCase(this.artist)) && (other.name.equalsIgnoreCase(this.name)))
+			return true;
+		else
+			return false;
+	}
+	
+	public int compareTo(Object arg0){
+		return 0;
+	}
+	
+	public String toString(){
+		return "Song: "+name+"\nArtist: "+artist+"\nAlbum: "+album+"\nYear:"+year;
+		
+	}
+
+}

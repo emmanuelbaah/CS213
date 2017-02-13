@@ -1,0 +1,11 @@
+package controller;
+
+import java.util.ArrayList;
+
+public class Node<T> {
+
+	Node<T> left;
+	Node<T> right;
+	T data;
+	ArrayList<T> namesList;
+}

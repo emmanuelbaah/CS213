@@ -1,0 +1,29 @@
+package FxTesting1.app;
+
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.layout.GridPane;
+import javafx.stage.Stage;
+
+public class FxTestingApplication extends Application{
+
+	@Override
+	public void start(Stage primaryStage) throws Exception {
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(getClass().getResource("/FxTesting1/view/test1.fxml"));
+		
+		GridPane root = (GridPane)loader.load();
+		
+		Scene scene = new Scene(root);
+		primaryStage.setScene(scene);
+		primaryStage.setTitle("TesterInProgress");
+		primaryStage.setResizable(false);
+		primaryStage.show();
+	}
+	
+	public static void main(String[] args){
+		launch();
+	}
+
+}

@@ -1,0 +1,44 @@
+package controller;
+
+import java.util.ArrayList;
+
+public class SongList {
+	
+	public Node<String> listOfArtists;
+	
+	public SongList(){
+		listOfArtists = new Node<String>();
+	}
+	
+	public void display(){
+		
+	}
+	
+	private ArrayList<Song> findArtist(String artist){
+		Node<String> curr = new Node<String>();
+		for(curr = listOfArtists; curr!=null; ){
+			if(curr.data.compareToIgnoreCase(artist) < 0){
+				curr = curr.right;
+			}else if(curr.data.compareToIgnoreCase(artist) > 0){
+				curr = curr.left;
+			}else{
+				return null;
+			}
+		}
+		return curr.namesList;
+	}
+	
+	public void add(String name, String artist){
+		
+	}
+	public void delete(){
+		
+	}
+	public void edit(){
+		
+	}
+	
+	public String toString(){
+		return listOfArtists.toString();
+	}
+}
